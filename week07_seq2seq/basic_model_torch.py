@@ -114,7 +114,11 @@ class BasicTranslationModel(nn.Module):
 
             logits_seq.append(logits)
             out_seq.append(y_t)
-            mask &= y_t != self.out_voc.eos_ix
+            
+            mask = mask.bool()
+   
+            print(mask, y_t.view(-1).long(), self.out_voc.eos_ix)
+            mask &= y_t.view(-1).long()  != self.out_voc.eos_ix  
 
             if not mask.any():
                 break
