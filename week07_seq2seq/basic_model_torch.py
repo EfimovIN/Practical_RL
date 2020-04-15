@@ -117,8 +117,8 @@ class BasicTranslationModel(nn.Module):
             
             mask = mask.bool()
    
-            print(mask, y_t.view(-1).long(), self.out_voc.eos_ix)
-            mask &= y_t.view(-1).long()  != self.out_voc.eos_ix  
+            
+            mask &= y_t  != self.out_voc.eos_ix  
 
             if not mask.any():
                 break
